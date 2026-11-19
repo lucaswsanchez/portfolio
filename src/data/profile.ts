@@ -39,7 +39,7 @@ export const education = [
   },
   {
     degree: "Associate Degree in Systems Analysis",
-    school: "Analista en Sistemas", // TODO: add the institution name
+    school: "ESBA — Instituto de Estudios Superiores de Buenos Aires",
     period: "Graduated 2025",
   },
 ];
