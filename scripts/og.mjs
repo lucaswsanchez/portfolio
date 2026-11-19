@@ -29,8 +29,9 @@ const svg = `
     <circle cx="96" cy="196" r="6" fill="#34b27b" />
     <text x="114" y="203" font-size="22" fill="${muted}">Open to work</text>
     <text x="80" y="300" font-size="88" font-weight="600" fill="${fg}" letter-spacing="-2.5">Lucas Sanchez</text>
-    <text x="82" y="366" font-size="34" fill="${fg}" fill-opacity="0.85">Software Developer — Python · TypeScript · React · SQL</text>
-    <text x="82" y="414" font-size="26" fill="${muted}">Corrientes, Argentina · Remote (UTC-3)</text>
+    <text x="82" y="366" font-size="36" fill="${fg}" fill-opacity="0.9">Systems Analyst &amp; Full-stack Developer</text>
+    <text x="82" y="410" font-size="26" fill="${muted}">Python · TypeScript · React · SQL — plus QA automation and IT support</text>
+    <text x="82" y="452" font-size="24" fill="${muted}">Corrientes, Argentina · Remote (UTC-3)</text>
   </g>
   <text x="82" y="552" font-family="Consolas, Geist Mono, monospace" font-size="22" fill="${muted}">github.com/lucaswsanchez</text>
   <text x="${W - 82}" y="552" text-anchor="end" font-family="Consolas, Geist Mono, monospace" font-size="22" fill="${muted}">LS.</text>

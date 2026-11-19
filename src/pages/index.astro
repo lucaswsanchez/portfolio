@@ -19,7 +19,6 @@ const headerLinks = [
 const [featured, ...rest] = visibleProjects;
 const paired = rest.find((p) => p.pairedWith?.name === featured?.name);
 const year = new Date().getFullYear();
-const [role, stack] = profile.title.split(" — ");
 ---
 
 <Base>
@@ -52,9 +51,8 @@ const [role, stack] = profile.title.split(" — ");
         {profile.name}
       </h1>
       <p class="rise mt-4 text-base text-fg/85 sm:text-lg" style="--i:2">
-        <span class="block sm:inline">{role}</span><span class="hidden sm:inline"> — </span><span
-          class="mt-0.5 block text-muted sm:mt-0 sm:inline sm:text-fg/85">{stack}</span
-        >
+        <span class="block font-medium text-fg/90">{profile.title}</span>
+        <span class="mt-1 block text-[15px] text-muted sm:text-base">{profile.subtitle}</span>
       </p>
       <p class="rise mt-2 flex items-center gap-1.5 text-sm text-muted" style="--i:2">
         <Icon name="pin" class="size-3.5 shrink-0" />
