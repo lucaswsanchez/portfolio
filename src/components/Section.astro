@@ -5,11 +5,13 @@ interface Props {
   title: string;
   /** Nav link to highlight while this section is in view (defaults to its own id). */
   navGroup?: string;
+  /** Label above and content at full width (used by Projects). */
+  wide?: boolean;
 }
-const { id, index, title, navGroup } = Astro.props;
+const { id, index, title, navGroup, wide = false } = Astro.props;
 ---
 
-<section id={id} data-nav-group={navGroup} aria-labelledby={`${id}-title`} class="reveal grid gap-5 sm:grid-cols-[8.5rem_1fr] sm:gap-8">
+<section id={id} data-nav-group={navGroup} aria-labelledby={`${id}-title`} class:list={["reveal grid gap-5", !wide && "sm:grid-cols-[8.5rem_1fr] sm:gap-8"]}>
   <h2 id={`${id}-title`} class="font-mono text-xs tracking-wide text-faint uppercase sm:pt-1">
     <span class="text-fg/70">{index}</span>
     <span aria-hidden="true"> — </span>

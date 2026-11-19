@@ -21,14 +21,24 @@ export const about = [
   "I like taking a real process, like booking an appointment, finding a junior job or fixing a locked account, and turning it into a tool that is simple to use. I'm looking for my first role in software development, QA, IT support or AI. I work in Spanish (native) and English (B2–C1).",
 ];
 
+// Only tools used in the projects above (checked against each repo).
 export const skills: { group: string; items: string[] }[] = [
   { group: "Languages", items: ["Python", "TypeScript", "JavaScript", "SQL", "PowerShell"] },
-  { group: "Frontend", items: ["React", "Vite", "Tailwind CSS", "HTML & CSS"] },
-  { group: "Backend", items: ["NestJS", "Node.js", "FastAPI", "Prisma", "REST & OpenAPI", "JWT auth"] },
-  { group: "Data", items: ["PostgreSQL", "Supabase", "ETL pipelines", "SQLAlchemy"] },
-  { group: "Testing", items: ["pytest", "Vitest", "Pester", "Playwright"] },
-  { group: "DevOps & Tools", items: ["Git", "GitHub Actions", "Docker", "Vercel", "Render"] },
-  { group: "IT Support", items: ["Windows", "Microsoft 365", "Active Directory", "ITIL 4", "Networking basics"] },
+  { group: "Backend", items: ["NestJS", "FastAPI", "Prisma", "SQLAlchemy", "REST & OpenAPI", "JWT auth"] },
+  { group: "Frontend", items: ["React", "Vite", "Tailwind CSS"] },
+  { group: "Data & AI", items: ["PostgreSQL", "Supabase", "ETL pipelines", "LLM APIs", "RAG (BM25)"] },
+  {
+    group: "Testing & DevOps",
+    items: ["pytest", "Jest", "Vitest", "Playwright", "Postman/Newman", "Pester", "GitHub Actions", "Docker"],
+  },
+];
+
+// How the five projects were run (same process in every repo).
+export const howIWork: { title: string; text: string }[] = [
+  { title: "User stories + Kanban", text: "Work starts as user stories with acceptance criteria on a GitHub Projects board." },
+  { title: "One PR per feature", text: "A branch and pull request per story, with Conventional Commits." },
+  { title: "CI on every PR", text: "Lint, type checks and tests run in GitHub Actions before anything merges." },
+  { title: "Tested before release", text: "Features ship with tests, and releases are versioned with a changelog." },
 ];
 
 export const education = [
