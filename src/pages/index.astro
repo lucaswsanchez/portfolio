@@ -24,7 +24,7 @@ const [role, stack] = profile.title.split(" — ");
   <main id="main" class="mx-auto max-w-3xl px-5 sm:px-8">
     <!-- Header -->
     <section id="top" class="pt-14 pb-24 sm:pt-24 sm:pb-32" aria-label="Introduction">
-      <div class="flex items-start justify-between gap-6">
+      <div class="flex flex-col-reverse gap-6 sm:flex-row sm:items-start sm:justify-between">
         <div class="min-w-0">
           <p
             class="rise mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-bg/70 px-3 py-1 text-xs font-medium text-muted backdrop-blur"
@@ -55,7 +55,7 @@ const [role, stack] = profile.title.split(" — ");
               alt={`Portrait of ${profile.name}`}
               width="96"
               height="96"
-              class="rise size-20 shrink-0 rounded-full object-cover ring-1 ring-line sm:size-24"
+              class="rise size-16 shrink-0 rounded-full object-cover ring-1 ring-line sm:size-24"
               style="--i:1"
             />
           ) : (

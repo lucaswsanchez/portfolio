@@ -6,12 +6,12 @@ export const profile = {
   title: "Software Developer — Python · TypeScript · React · SQL",
   location: "Corrientes, Argentina · Remote (UTC-3)",
   // Optional photo in /public (e.g. "/me.webp"). Empty = show the initials monogram.
-  photo: "",
-  email: "42994495lucas@gmail.com",
+  photo: "/me.webp",
+  email: "sanchezwlucas@gmail.com",
   github: "https://github.com/lucaswsanchez",
   linkedin: "https://www.linkedin.com/in/lucaswsanchez/",
-  // TODO: add the CV PDF to /public (e.g. "/Lucas-Sanchez-CV.pdf"). Empty = the CV button is hidden.
-  cv: "",
+  // CV PDF in /public. Empty = the CV button is hidden.
+  cv: "/Lucas_Sanchez_CV.pdf",
   seoDescription:
     "Lucas Sanchez — Software Developer from Corrientes, Argentina. Full-stack, data and IT support projects built with Python, TypeScript, React and SQL.",
 };
@@ -33,13 +33,13 @@ export const skills: { group: string; items: string[] }[] = [
 
 export const education = [
   {
-    degree: "Licenciatura en Gestión de Tecnologías para las Organizaciones",
+    degree: "B.A. in Technologies for Organizational Management",
     school: "Universidad Nacional del Litoral (UNL)",
     period: "In progress",
   },
   {
     degree: "Associate Degree in Systems Analysis",
-    school: "ESBA — Instituto de Estudios Superiores de Buenos Aires",
+    school: "Instituto de Estudios Superiores de Buenos Aires (ESBA)",
     period: "Graduated 2025",
   },
 ];
