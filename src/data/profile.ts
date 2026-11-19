@@ -5,7 +5,7 @@ export const profile = {
   initials: "LS",
   title: "Software Developer — Python · TypeScript · React · SQL",
   location: "Corrientes, Argentina · Remote (UTC-3)",
-  // Optional photo in /public (e.g. "/me.webp"). Empty = show the initials monogram.
+  // Optional photo in /public (e.g. "/me.webp"), shown small next to the "Open to work" pill. Empty = no photo.
   photo: "/me.webp",
   email: "sanchezwlucas@gmail.com",
   github: "https://github.com/lucaswsanchez",
