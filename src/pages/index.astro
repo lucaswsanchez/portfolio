@@ -1,0 +1,177 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Section from "../components/Section.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Icon from "../components/Icon.astro";
+import Backdrop from "../components/Backdrop.astro";
+import { profile, about, skills, education } from "../data/profile";
+import { visibleProjects } from "../data/projects";
+
+const headerLinks = [
+  { label: "GitHub", href: profile.github, icon: "github" as const, external: true },
+  { label: "LinkedIn", href: profile.linkedin, icon: "linkedin" as const, external: true },
+  { label: "Email", href: `mailto:${profile.email}`, icon: "mail" as const, external: false },
+  ...(profile.cv ? [{ label: "CV", href: profile.cv, icon: "file" as const, external: true }] : []),
+];
+const year = new Date().getFullYear();
+const [role, stack] = profile.title.split(" — ");
+---
+
+<Base>
+  <Nav />
+  <Backdrop />
+  <main id="main" class="mx-auto max-w-3xl px-5 sm:px-8">
+    <!-- Header -->
+    <section id="top" class="pt-14 pb-24 sm:pt-24 sm:pb-32" aria-label="Introduction">
+      <div class="flex items-start justify-between gap-6">
+        <div class="min-w-0">
+          <p
+            class="rise mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-bg/70 px-3 py-1 text-xs font-medium text-muted backdrop-blur"
+            style="--i:0"
+          >
+            <span class="relative flex size-2" aria-hidden="true">
+              <span class="relative inline-flex size-2 rounded-full bg-emerald-500/90"></span>
+            </span>
+            Open to work · Dev, QA, IT support & AI
+          </p>
+          <h1 class="rise text-[2.6rem] leading-[1.05] font-semibold tracking-[-0.035em] sm:text-6xl" style="--i:0">
+            {profile.name}
+          </h1>
+          <p class="rise mt-4 text-base text-fg/85 sm:text-lg" style="--i:1">
+            <span class="block sm:inline">{role}</span><span class="hidden sm:inline"> — </span><span
+              class="mt-0.5 block text-muted sm:mt-0 sm:inline sm:text-fg/85">{stack}</span
+            >
+          </p>
+          <p class="rise mt-2 flex items-center gap-1.5 text-sm text-muted" style="--i:2">
+            <Icon name="pin" class="size-3.5 shrink-0" />
+            {profile.location}
+          </p>
+        </div>
+        {
+          profile.photo ? (
+            <img
+              src={profile.photo}
+              alt={`Portrait of ${profile.name}`}
+              width="96"
+              height="96"
+              class="rise size-20 shrink-0 rounded-full object-cover ring-1 ring-line sm:size-24"
+              style="--i:1"
+            />
+          ) : (
+            <div
+              aria-hidden="true"
+              class="rise hidden size-20 shrink-0 place-items-center rounded-full border border-line bg-surface font-mono text-xl text-muted min-[420px]:grid sm:size-24 sm:text-2xl"
+              style="--i:1"
+            >
+              {profile.initials}
+            </div>
+          )
+        }
+      </div>
+
+      <ul class="rise mt-8 flex flex-wrap gap-2" style="--i:3" aria-label="Profiles and contact">
+        {
+          headerLinks.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-line px-3.5 text-sm text-muted sm:min-h-0 sm:px-3 sm:py-1.5 transition-colors hover:border-fg/25 hover:text-fg"
+              >
+                <Icon name={l.icon} class="size-4" />
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <div class="flex flex-col gap-20 pb-24 sm:gap-24">
+      <Section id="about" index="01" title="About">
+        <div class="space-y-4 leading-relaxed text-fg/85">
+          {about.map((p) => <p>{p}</p>)}
+        </div>
+      </Section>
+
+      <Section id="skills" index="02" title="Skills" navGroup="about">
+        <dl class="grid gap-x-6 gap-y-4 sm:grid-cols-[7.5rem_1fr]">
+          {
+            skills.map((s) => (
+              <>
+                <dt class="text-sm font-medium sm:pt-1">{s.group}</dt>
+                <dd class="-mt-2 flex flex-wrap gap-1.5 sm:mt-0">
+                  {s.items.map((item) => (
+                    <span class="rounded-md bg-surface px-2 py-1 font-mono text-xs text-muted ring-1 ring-line">
+                      {item}
+                    </span>
+                  ))}
+                </dd>
+              </>
+            ))
+          }
+        </dl>
+      </Section>
+
+      <Section id="projects" index="03" title="Projects">
+        <div class="grid gap-4">
+          {visibleProjects.map((project) => <ProjectCard project={project} />)}
+        </div>
+      </Section>
+
+      <Section id="education" index="04" title="Education" navGroup="contact">
+        <ol class="space-y-5">
+          {
+            education.map((e) => (
+              <li class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <div>
+                  <p class="font-medium">{e.degree}</p>
+                  <p class="text-sm text-muted">{e.school}</p>
+                </div>
+                <p class="shrink-0 font-mono text-xs text-faint">{e.period}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </Section>
+
+      <Section id="contact" index="05" title="Contact">
+        <p class="leading-relaxed text-fg/85">
+          Open to junior roles in software development, QA, IT support and AI, remote or hybrid. The fastest way to
+          reach me is email.
+        </p>
+        <a
+          href={`mailto:${profile.email}`}
+          class="group mt-5 inline-flex items-center gap-2 text-base font-medium sm:text-lg break-all text-fg underline decoration-line decoration-1 underline-offset-[6px] transition-colors hover:decoration-fg/50"
+        >
+          {profile.email}
+          <Icon name="arrow" class="size-4 shrink-0 text-muted transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </a>
+        <div class="mt-3">
+          <button
+            type="button"
+            data-copy={profile.email}
+            class="inline-flex items-center gap-1.5 rounded-lg border border-line bg-bg/60 px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:border-fg/25 hover:text-fg"
+          >
+            <Icon name="copy" class="size-3.5" />
+            <span data-copy-label aria-live="polite">Copy email</span>
+          </button>
+        </div>
+        <p class="mt-5 text-sm text-muted">
+          Or find me on{" "}
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="text-fg underline decoration-line underline-offset-4 hover:decoration-fg/50">LinkedIn</a>{" "}
+          and{" "}
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" class="text-fg underline decoration-line underline-offset-4 hover:decoration-fg/50">GitHub</a>.
+        </p>
+      </Section>
+    </div>
+  </main>
+
+  <footer class="mx-auto max-w-3xl border-t border-line px-5 py-8 font-mono text-xs text-faint sm:px-8">
+    © {year} {profile.name} · Built with Astro
+  </footer>
+  <script>
+    import "../scripts/ui.ts";
+  </script>
+</Base>

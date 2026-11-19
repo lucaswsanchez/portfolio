@@ -1,0 +1,79 @@
+<!--
+  Decorative background behind the header: a fine "blueprint" grid that fades out,
+  a slow drifting accent glow, and (on desktop) a brighter grid under the cursor.
+  Pure CSS; the cursor position comes from src/scripts/ui.ts via --mx / --my.
+-->
+<div aria-hidden="true" class="backdrop pointer-events-none absolute inset-x-0 top-0 -z-10 h-[44rem] overflow-hidden">
+  <div class="backdrop-glow"></div>
+  <div class="backdrop-grid"></div>
+  <div class="backdrop-grid backdrop-grid--lit"></div>
+</div>
+
+<style>
+  .backdrop {
+    --grid: color-mix(in oklch, var(--color-fg) 5.5%, transparent);
+    --grid-lit: color-mix(in oklch, var(--color-fg) 14%, transparent);
+    mask-image: linear-gradient(to bottom, black 35%, transparent 100%);
+  }
+
+  .backdrop-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, var(--grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+    background-size: 36px 36px;
+    background-position: center top;
+    mask-image: radial-gradient(ellipse 70% 75% at 50% 0%, black 30%, transparent 75%);
+  }
+
+  .backdrop-grid--lit {
+    --grid: var(--grid-lit);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    mask-image: radial-gradient(160px circle at var(--mx, 50%) var(--my, -999px), black, transparent 70%);
+  }
+
+  :global(html.pointer-active) .backdrop-grid--lit {
+    opacity: 1;
+  }
+
+  .backdrop-glow {
+    position: absolute;
+    top: -14rem;
+    left: 50%;
+    width: 46rem;
+    height: 30rem;
+    margin-left: -23rem;
+    border-radius: 9999px;
+    background: radial-gradient(
+      closest-side,
+      color-mix(in oklch, var(--color-fg) 6%, transparent),
+      transparent
+    );
+    filter: blur(20px);
+    opacity: 0.9;
+  }
+
+  :global(.dark) .backdrop-glow {
+    opacity: 0.6;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .backdrop-glow {
+      animation: drift 40s ease-in-out infinite alternate;
+    }
+  }
+
+  @keyframes drift {
+    0% {
+      transform: translate3d(-8%, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(4%, 1rem, 0) scale(1.03);
+    }
+    100% {
+      transform: translate3d(10%, -0.5rem, 0) scale(0.98);
+    }
+  }
+</style>

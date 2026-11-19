@@ -1,0 +1,40 @@
+// Generates public/og.png (1200×630), the link preview image for LinkedIn, WhatsApp, etc.
+// Run: pnpm og
+import sharp from "sharp";
+
+const W = 1200;
+const H = 630;
+const bg = "#16171a";
+const fg = "#f1f2f4";
+const muted = "#9a9ca3";
+const line = "rgba(255,255,255,0.05)";
+
+const grid = [];
+for (let x = 0; x <= W; x += 40) grid.push(`<line x1="${x}" y1="0" x2="${x}" y2="${H}" />`);
+for (let y = 0; y <= H; y += 40) grid.push(`<line x1="0" y1="${y}" x2="${W}" y2="${y}" />`);
+
+const svg = `
+<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <defs>
+    <radialGradient id="fade" cx="50%" cy="0%" r="85%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="1" />
+      <stop offset="100%" stop-color="#fff" stop-opacity="0" />
+    </radialGradient>
+    <mask id="m"><rect width="${W}" height="${H}" fill="url(#fade)" /></mask>
+  </defs>
+  <rect width="${W}" height="${H}" fill="${bg}" />
+  <g stroke="${line}" stroke-width="1" mask="url(#m)">${grid.join("")}</g>
+
+  <g font-family="Segoe UI, Inter, Arial, sans-serif">
+    <circle cx="96" cy="196" r="6" fill="#34b27b" />
+    <text x="114" y="203" font-size="22" fill="${muted}">Open to work</text>
+    <text x="80" y="300" font-size="88" font-weight="600" fill="${fg}" letter-spacing="-2.5">Lucas Sanchez</text>
+    <text x="82" y="366" font-size="34" fill="${fg}" fill-opacity="0.85">Software Developer — Python · TypeScript · React · SQL</text>
+    <text x="82" y="414" font-size="26" fill="${muted}">Corrientes, Argentina · Remote (UTC-3)</text>
+  </g>
+  <text x="82" y="552" font-family="Consolas, Geist Mono, monospace" font-size="22" fill="${muted}">github.com/lucaswsanchez</text>
+  <text x="${W - 82}" y="552" text-anchor="end" font-family="Consolas, Geist Mono, monospace" font-size="22" fill="${muted}">LS.</text>
+</svg>`;
+
+await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile("public/og.png");
+console.log("public/og.png written");
