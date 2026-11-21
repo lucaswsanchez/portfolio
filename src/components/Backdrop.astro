@@ -5,14 +5,22 @@
 -->
 <div aria-hidden="true" class="backdrop pointer-events-none absolute inset-x-0 top-0 -z-10 h-[44rem] overflow-hidden">
   <div class="backdrop-glow"></div>
-  <div class="backdrop-grid"></div>
-  <div class="backdrop-grid backdrop-grid--lit"></div>
+  <!-- Only the grids are masked; the animated glow stays outside the mask so it never forces a repaint. -->
+  <div class="backdrop-grids">
+    <div class="backdrop-grid"></div>
+    <div class="backdrop-grid backdrop-grid--lit"></div>
+  </div>
 </div>
 
 <style>
   .backdrop {
     --grid: color-mix(in oklch, var(--color-fg) 5.5%, transparent);
     --grid-lit: color-mix(in oklch, var(--color-fg) 14%, transparent);
+  }
+
+  .backdrop-grids {
+    position: absolute;
+    inset: 0;
     mask-image: linear-gradient(to bottom, black 35%, transparent 100%);
   }
 
@@ -51,8 +59,8 @@
       color-mix(in oklch, var(--color-fg) 6%, transparent),
       transparent
     );
-    filter: blur(20px);
     opacity: 0.9;
+    will-change: transform;
   }
 
   :global(.dark) .backdrop-glow {
