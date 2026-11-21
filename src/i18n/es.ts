@@ -49,13 +49,13 @@ export const es: Dict = {
   hero: {
     title: "Analista de Sistemas y Desarrollador Full Stack",
     subtitle: "Python · TypeScript · React · SQL — además, automatización de QA y soporte IT",
-    location: "Corrientes, Argentina · Remoto (UTC-3)",
+    location: "Corrientes, Argentina (UTC-3)",
   },
   cv: { href: "/Lucas_Sanchez_CV_ES.pdf", fileName: "Lucas_Sanchez_CV_ES.pdf" },
   about: [
-    "Soy Analista de Sistemas (técnico superior, egresado en 2025) de Corrientes, Argentina, y curso la Licenciatura en Gestión de Tecnologías para las Organizaciones en la UNL. Desarrollo software de punta a punta y lo llevo a producción: APIs REST, pipelines de datos, dashboards y funcionalidades con LLMs, con los tests, el CI y la documentación que los mantienen sostenibles.",
+    "Soy Analista de Sistemas (técnico superior, egresado en 2025) de Corrientes, Argentina, y curso la Licenciatura en Tecnologías para la Gestión de las Organizaciones en la UNL. Desarrollo software de punta a punta y lo llevo a producción: APIs REST, pipelines de datos, dashboards y funcionalidades con LLMs, con los tests, el CI y la documentación que los mantienen sostenibles.",
     "Me gusta tomar un proceso real —reservar un turno, encontrar un primer trabajo, desbloquear una cuenta— y convertirlo en una herramienta simple de usar, y después demostrar que funciona: mi suite de QA para BookFlow encontró 4 bugs reales, que corregí y volví a verificar.",
-    "Busco mi primer puesto en desarrollo de software, QA, soporte IT o IA, remoto (UTC-3) o presencial en Corrientes. Trabajo en español (nativo) e inglés (B2–C1).",
+    "Busco mi primer puesto en desarrollo de software, QA, soporte IT o IA: remoto, híbrido o presencial en Corrientes; abierto a reubicación. Trabajo en español (nativo) e inglés (B2).",
   ],
   skills: [
     { group: "Lenguajes", items: ["Python", "TypeScript", "JavaScript", "SQL", "PowerShell", "Java", "HTML/CSS"] },
@@ -120,7 +120,7 @@ export const es: Dict = {
   ],
   education: [
     {
-      degree: "Licenciatura en Gestión de Tecnologías para las Organizaciones",
+      degree: "Licenciatura en Tecnologías para la Gestión de las Organizaciones",
       school: "Universidad Nacional del Litoral",
       period: "En curso",
     },
@@ -131,7 +131,7 @@ export const es: Dict = {
     },
   ],
   contact: {
-    text: "Busco puestos junior en desarrollo de software, QA, soporte IT e IA, remotos o híbridos. La forma más rápida de contactarme es por email.",
+    text: "Busco puestos junior en desarrollo de software, QA, soporte IT e IA: remoto, híbrido o presencial en Corrientes; abierto a reubicación. La forma más rápida de contactarme es por email.",
     elsewhere: "También estoy en",
     and: "y",
   },

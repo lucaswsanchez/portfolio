@@ -47,13 +47,13 @@ export const en = {
   hero: {
     title: "Systems Analyst & Full-stack Developer",
     subtitle: "Python · TypeScript · React · SQL — plus QA automation and IT support",
-    location: "Corrientes, Argentina · Remote (UTC-3)",
+    location: "Corrientes, Argentina (UTC-3)",
   },
   cv: { href: "/Lucas_Sanchez_CV_EN.pdf", fileName: "Lucas_Sanchez_CV_EN.pdf" },
   about: [
     "I'm a Systems Analyst (Associate Degree, 2025) from Corrientes, Argentina, currently studying Technologies for Organizational Management at UNL. I build software end to end and ship it: REST APIs, data pipelines, dashboards and LLM features, with the tests, CI and documentation that keep them maintainable.",
     "I like taking a real process — booking an appointment, finding a junior job, fixing a locked account — and turning it into a tool that is simple to use, then proving it works: my QA suite for BookFlow found 4 real bugs, which I fixed and retested.",
-    "I'm looking for my first role in software development, QA, IT support or AI, remote (UTC-3) or on-site in Corrientes. I work in Spanish (native) and English (B2–C1).",
+    "I'm looking for my first role in software development, QA, IT support or AI: remote, hybrid or on-site in Corrientes; open to relocation. I work in Spanish (native) and English (B2).",
   ],
   // Tools from the projects (checked against each repo) plus earlier work Lucas
   // can defend (Java/Spring Boot/MySQL team project, LightGBM crypto pipeline).
@@ -130,7 +130,7 @@ export const en = {
     },
   ],
   contact: {
-    text: "Open to junior roles in software development, QA, IT support and AI, remote or hybrid. The fastest way to reach me is email.",
+    text: "Open to junior roles in software development, QA, IT support and AI: remote, hybrid or on-site in Corrientes; open to relocation. The fastest way to reach me is email.",
     elsewhere: "Or find me on",
     and: "and",
   },

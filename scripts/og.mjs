@@ -15,13 +15,13 @@ const texts = {
     status: "Open to work",
     title: "Systems Analyst &amp; Full-stack Developer",
     subtitle: "Python · TypeScript · React · SQL — plus QA automation and IT support",
-    location: "Corrientes, Argentina · Remote (UTC-3)",
+    location: "Corrientes, Argentina (UTC-3) · Remote, hybrid or on-site · Open to relocation",
   },
   "og-es.png": {
     status: "Disponible",
     title: "Analista de Sistemas y Desarrollador Full Stack",
     subtitle: "Python · TypeScript · React · SQL — además, QA y soporte IT",
-    location: "Corrientes, Argentina · Remoto (UTC-3)",
+    location: "Corrientes, Argentina (UTC-3) · Remoto, híbrido o presencial · Abierto a reubicación",
   },
 };
 
