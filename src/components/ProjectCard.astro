@@ -2,15 +2,18 @@
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import type { Project } from "../data/projects";
+import type { Dict } from "../i18n/en";
 
 interface Props {
   project: Project;
+  dict: Dict;
   variant?: "featured" | "compact";
 }
-const { project, variant = "compact" } = Astro.props;
+const { project, dict, variant = "compact" } = Astro.props;
+const text = dict.projects[project.id];
 const featured = variant === "featured";
-const iconFor = { demo: "arrow", docs: "book", code: "code" } as const;
-const demo = project.links.find((l) => l.kind === "demo");
+const iconFor = { demo: "arrow", reports: "arrow", site: "arrow", docs: "book", code: "code" } as const;
+const primary = project.links.find((l) => l.label !== "code" && l.label !== "docs") ?? project.links[0];
 ---
 
 <article
@@ -19,7 +22,7 @@ const demo = project.links.find((l) => l.kind === "demo");
   {
     project.image && (
       <a
-        href={demo?.href ?? project.links[0].href}
+        href={primary.href}
         target="_blank"
         rel="noopener noreferrer"
         tabindex="-1"
@@ -28,7 +31,7 @@ const demo = project.links.find((l) => l.kind === "demo");
       >
         <!-- Screenshots sit in a small "window" frame so light captures don't clash with the dark theme. -->
         <Image
-          src={project.image.src}
+          src={project.image}
           alt=""
           widths={featured ? [480, 720, 1040, 1400] : [400, 560, 720]}
           sizes={featured ? "(min-width: 768px) 700px, 100vw" : "(min-width: 768px) 340px, 100vw"}
@@ -49,22 +52,20 @@ const demo = project.links.find((l) => l.kind === "demo");
     <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
       <h3 class:list={["font-semibold tracking-tight", featured && "text-lg"]}>{project.name}</h3>
       {
-        project.pairedWith && (
-          <span class="rounded-full border border-line px-2 py-0.5 font-mono text-[10.5px] text-muted">
-            Tests {project.pairedWith.name}
-          </span>
+        text.badge && (
+          <span class="rounded-full border border-line px-2 py-0.5 font-mono text-[10.5px] text-muted">{text.badge}</span>
         )
       }
     </div>
-    <p class:list={["mt-2 leading-relaxed text-muted", featured ? "text-[15px]" : "text-sm"]}>{project.description}</p>
-    {project.image && <p class="sr-only">Screenshot: {project.image.alt}</p>}
+    <p class:list={["mt-2 leading-relaxed text-muted", featured ? "text-[15px]" : "text-sm"]}>{text.description}</p>
+    {project.image && <p class="sr-only">{dict.ui.screenshot}: {text.imageAlt}</p>}
 
     <ul
       class="mt-3 flex flex-wrap gap-x-3.5 gap-y-1 rounded-md bg-fg/[0.045] px-2.5 py-1.5 font-mono text-[11.5px] leading-snug text-fg/85"
-      aria-label={`${project.name} highlights`}
+      aria-label={`${project.name} ${dict.ui.highlightsOf}`}
     >
       {
-        project.metrics.map((m) => (
+        text.metrics.map((m) => (
           <li class="flex items-center gap-1.5">
             <span class="size-1 shrink-0 rounded-full bg-fg/40" aria-hidden="true" />
             {m}
@@ -73,7 +74,7 @@ const demo = project.links.find((l) => l.kind === "demo");
       }
     </ul>
 
-    <ul class="mt-3 flex flex-wrap gap-1.5" aria-label={`${project.name} stack`}>
+    <ul class="mt-3 flex flex-wrap gap-1.5" aria-label={`${project.name} ${dict.ui.stackOf}`}>
       {
         project.stack.map((tech) => (
           <li class="rounded-md border border-line bg-bg/60 px-2 py-0.5 font-mono text-[11px] text-muted">{tech}</li>
@@ -90,14 +91,16 @@ const demo = project.links.find((l) => l.kind === "demo");
             rel="noopener noreferrer"
             class:list={[
               "inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
-              link.kind === "demo"
+              link === primary
                 ? "bg-fg text-bg hover:opacity-85"
                 : "border border-line bg-bg/60 text-fg hover:border-fg/25",
             ]}
           >
-            <Icon name={iconFor[link.kind]} class="size-3.5" />
-            {link.label}
-            <span class="sr-only">for {project.name} (opens in a new tab)</span>
+            <Icon name={iconFor[link.label]} class="size-3.5" />
+            {dict.linkLabels[link.label]}
+            <span class="sr-only">
+              {dict.ui.linkFor} {project.name} ({dict.ui.opensInNewTab})
+            </span>
           </a>
         ))
       }

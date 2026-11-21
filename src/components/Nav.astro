@@ -1,17 +1,25 @@
 ---
 import Icon from "./Icon.astro";
+import { t, langs, homePath, htmlLang, type Lang } from "../i18n";
 
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const dict = t(lang);
+// Each language named in itself, for screen readers (visible text stays EN | ES).
+const langNames: Record<Lang, string> = { en: "English", es: "Español" };
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
+  { href: "#about", label: dict.nav.about },
+  { href: "#projects", label: dict.nav.projects },
+  { href: "#contact", label: dict.nav.contact },
 ];
 ---
 
 <!-- Floating, centered pill navigation. -->
-<header class="pointer-events-none fixed inset-x-0 top-3 z-40 flex justify-center px-4 sm:top-5">
+<header class="pointer-events-none fixed inset-x-0 top-3 z-40 flex justify-center px-2.5 sm:top-5 sm:px-4">
   <nav
-    aria-label="Main"
+    aria-label={dict.ui.mainNav}
     class="nav-pill pointer-events-auto flex items-center gap-0.5 rounded-full border border-line bg-bg/70 p-1 shadow-[0_8px_30px_-12px_rgb(0_0_0/0.25)] backdrop-blur-xl backdrop-saturate-150 transition-[background-color,box-shadow] duration-300 [&.scrolled]:bg-bg/85 [&.scrolled]:shadow-[0_10px_40px_-12px_rgb(0_0_0/0.35)]"
   >
     <ul class="flex items-center">
@@ -21,7 +29,7 @@ const links = [
             <a
               href={l.href}
               data-nav={l.href.slice(1)}
-              class="block rounded-full px-3.5 py-1.5 text-sm text-muted transition-colors duration-200 hover:text-fg aria-[current]:bg-fg/[0.07] aria-[current]:text-fg"
+              class="block rounded-full px-2.5 py-1.5 text-[13px] whitespace-nowrap text-muted transition-colors duration-200 hover:text-fg aria-[current]:bg-fg/[0.07] aria-[current]:text-fg sm:px-3.5 sm:text-sm"
             >
               {l.label}
             </a>
@@ -29,12 +37,36 @@ const links = [
         ))
       }
     </ul>
-    <span class="mx-1 h-4 w-px bg-line" aria-hidden="true"></span>
+    <span class="mx-0.5 h-4 w-px bg-line sm:mx-1" aria-hidden="true"></span>
+    <ul class="flex items-center font-mono text-[11px] sm:text-xs" aria-label={dict.ui.languageNav}>
+      {
+        langs.map((l, i) => (
+          <li class="flex items-center">
+            {i > 0 && (
+              <span class="text-faint" aria-hidden="true">
+                |
+              </span>
+            )}
+            <a
+              href={homePath(l)}
+              hreflang={htmlLang[l]}
+              lang={htmlLang[l]}
+              data-lang-switch={l}
+              aria-current={l === lang ? "page" : undefined}
+              class="block rounded-full px-1.5 py-1.5 tracking-wide text-muted transition-colors duration-200 hover:text-fg aria-[current=page]:font-semibold aria-[current=page]:text-fg"
+            >
+              {l.toUpperCase()}
+              <span class="sr-only">({langNames[l]})</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
     <button
       id="theme-toggle"
       type="button"
       class="grid size-8 place-items-center rounded-full text-muted transition-colors duration-200 hover:bg-fg/[0.07] hover:text-fg"
-      aria-label="Toggle dark mode"
+      aria-label={dict.ui.toggleTheme}
     >
       <Icon name="moon" class="size-4 dark:hidden" />
       <Icon name="sun" class="hidden size-4 dark:block" />
@@ -50,9 +82,19 @@ const links = [
     sync();
     btn.addEventListener("click", () => {
       const dark = root.classList.toggle("dark");
-      localStorage.setItem("theme", dark ? "dark" : "light");
+      try {
+        localStorage.setItem("theme", dark ? "dark" : "light");
+      } catch {}
       sync();
     });
+    // Remember an explicit language choice (stops the first-visit redirect to /es/).
+    document.querySelectorAll("[data-lang-switch]").forEach((a) =>
+      a.addEventListener("click", () => {
+        try {
+          localStorage.setItem("lang", a.dataset.langSwitch);
+        } catch {}
+      }),
+    );
     const pill = btn.closest("nav");
     const onScroll = () => pill.classList.toggle("scrolled", scrollY > 8);
     onScroll();

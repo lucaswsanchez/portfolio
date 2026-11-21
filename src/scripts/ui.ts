@@ -61,14 +61,16 @@ document.querySelectorAll("main section[id]").forEach((s) => observer.observe(s)
 
 // 3. Copy email button.
 document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((btn) => {
+  // Labels come from the page's dictionary (data-label-* attributes).
   const label = btn.querySelector<HTMLElement>("[data-copy-label]");
+  const { labelCopy = "", labelCopied = "", labelFallback = "" } = btn.dataset;
   btn.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(btn.dataset.copy!);
-      if (label) label.textContent = "Copied ✓";
+      if (label) label.textContent = labelCopied;
     } catch {
-      if (label) label.textContent = "Press Ctrl+C";
+      if (label) label.textContent = labelFallback;
     }
-    setTimeout(() => label && (label.textContent = "Copy email"), 2000);
+    setTimeout(() => label && (label.textContent = labelCopy), 2000);
   });
 });
